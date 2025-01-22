@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Romantic Quiz</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background: linear-gradient(to bottom, #ff9a8b, #ff6a88, #ff8c6d);
+      color: #fff;
+      text-align: center;
+    }
+
+    #sticker {
+      width: 150px;
+      height: 150px;
+      margin-bottom: 20px;
+      animation: bounce 1.5s infinite;
+    }
+
+    .question {
+      font-size: 28px;
+      margin-bottom: 20px;
+      font-weight: bold;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 20px;
+    }
+
+    button {
+      padding: 15px 30px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #fff;
+      background: #ff5e57;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    button:hover {
+      background: #e04848;
+    }
+
+    footer {
+      position: absolute;
+      bottom: 10px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #ffe4e1;
+    }
+
+    footer a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    #share {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #fff;
+      background: #ffb347;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    #share:hover {
+      background: #e6a23c;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <img id="sticker" src="https://play-lh.googleusercontent.com/0_kMh3ElxON8vTXO_bt2rpczk_KY_Kh65_HQNO-QVxz7GKbjvrljkIUWGI56YpsGGw=w240-h480-rw" alt="Sticker">
+  <p class="question" id="questionText">🌹 Kya Tum Mujhe Pyar Karte Ho? 🌹</p>
+  <div class="buttons">
+    <button id="yesButton" onclick="handleAnswer()">YES ❤️</button>
+    <button id="noButton" onclick="handleNo()">NO 💔</button>
+  </div>
+  <button id="share" onclick="shareLink()">For My GF/BF</button>
+  <footer>
+    THIS SITE IS MADE BY -> <a href="https://www.instagram.com/arman__khan_2.0?igsh=MWFlZTB3MnE1ZjR0ag==" target="_blank">arman__khan_2.0</a>
+  </footer>
+
+  <script>
+    const questions = [
+      "🌹 Kya Tum Mujhe Pyar Karte Ho? 🌹",
+      "🌸 Kya Tum Mere Saath Khush Rahoge? 🌸",
+      "💖 Kya Tumhe Lagta Hai Main Special Hoon? 💖",
+      "💞 Kya Tum Mere Saath Zindagi Bhar Rehna Chahoge? 💞"
+    ];
+
+    let currentQuestionIndex = 0;
+
+    function handleAnswer() {
+      currentQuestionIndex++;
+      if (currentQuestionIndex >= questions.length) {
+        currentQuestionIndex = 0;
+      }
+      document.getElementById("questionText").textContent = questions[currentQuestionIndex];
+    }
+
+    function handleNo() {
+      const noButton = document.getElementById("noButton");
+      const randomX = Math.random() * (window.innerWidth - noButton.offsetWidth);
+      const randomY = Math.random() * (window.innerHeight - noButton.offsetHeight);
+      noButton.style.position = "absolute";
+      noButton.style.left = `${randomX}px`;
+      noButton.style.top = `${randomY}px`;
+    }
+
+    function shareLink() {
+      const username = prompt("Enter your name:");
+      const message = "shared this link with you!";
+      if (username) {
+        alert(`${username} ${message}`);
+        const url = window.location.href;
+        navigator.clipboard.writeText(url).then(() => {
+          alert("Link copied to clipboard!");
+        });
+      } else {
+        alert("Name is required to share!");
+      }
+    }
+  </script>
+</body>
+</html>
